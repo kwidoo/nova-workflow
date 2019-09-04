@@ -1,6 +1,6 @@
 <?php
 
-namespace Cammac\Workflow;
+namespace TeamMercheon\Workflow;
 
 use Laravel\Nova\Nova;
 use Laravel\Nova\Events\ServingNova;

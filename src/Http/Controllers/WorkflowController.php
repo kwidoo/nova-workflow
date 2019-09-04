@@ -1,6 +1,6 @@
 <?php
 
-namespace Cammac\Workflow\Http\Controllers;
+namespace TeamMercheon\Workflow\Http\Controllers;
 
 class WorkflowController
 {

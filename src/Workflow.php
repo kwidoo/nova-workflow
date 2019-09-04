@@ -1,6 +1,6 @@
 <?php
 
-namespace Cammac\Workflow;
+namespace TeamMercheon\Workflow;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
