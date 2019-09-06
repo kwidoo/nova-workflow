@@ -9,6 +9,7 @@ use Laravel\Nova\ResourceTool;
 class Workflow extends ResourceTool
 {
     private $hide = false;
+    private $workflow_name;
 
     /**
      * Workflow constructor.
@@ -17,9 +18,10 @@ class Workflow extends ResourceTool
     public function __construct(string $workflow_name)
     {
         parent::__construct();
-
         try {
             $workflow = collect(config("workflow.workflows." . $workflow_name));
+
+            $this->workflow_name = $workflow['display_name'] ?? 'Workflow';
 
             $workflow = $workflow->merge(['property_path' => $workflow['column']]);
 
@@ -50,7 +52,8 @@ class Workflow extends ResourceTool
      */
     public function name()
     {
-        return 'Workflow';
+        info($this->workflow_name);
+        return $this->workflow_name;
     }
 
     /**
@@ -72,8 +75,8 @@ class Workflow extends ResourceTool
     {
         return array_merge([
             'component'   => 'panel',
-            'name'        => $this->name,
-            'showToolbar' => $this->showToolbar,
+        //    'name'        => $this->name,
+        //    'showToolbar' => $this->showToolbar,
         ], $this->element->meta());
     }
 

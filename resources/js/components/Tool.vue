@@ -1,6 +1,6 @@
 <template>
   <div class="flex" v-if="Object.keys(transactions).length > 0">
-    <div class="flex-1 m-1" v-for="(showModal, transaction) in transactions">
+    <div class="flex-1 m-1" v-for="(showModal, transaction) in transactions" :key="transaction">
       <button class="bg-50 w-full btn m-1 p-2 rounded" :class="classes(transaction)" @click.prevent="openModal(transaction)">{{transaction}}</button>
       <modal v-if="showModal" @modal-close="close(transaction)">
         <form
@@ -12,7 +12,7 @@
               <heading :level="2" class="mb-6">{{ __('Choose one of the reasons') }}</heading>
               <p class="text-80 leading-normal">
                 <select v-if="reasons(transaction) != 'textarea'" v-model="reason" class="form-control form-select w-full">
-                  <option v-for="(item, index) in reasons(transaction)" :value="index">{{ item}}</option>
+                  <option v-for="(item, index) in reasons(transaction)" :value="index" :key="index">{{ item}}</option>
                 </select>
                 <textarea v-else v-model="reason" class="form-control form-input-bordered h-auto w-full"></textarea>
               </p>
@@ -84,7 +84,6 @@
       async action(transaction) {
         var self = this,
         slug = `${this.field.workflow}/${this.resourceId}/${transaction.replace(/\s/g, '_')}/${this.reason}`;
-
         await Nova.request().get(`/nova-vendor/workflow/${slug}`);
 
         self.close(transaction);
